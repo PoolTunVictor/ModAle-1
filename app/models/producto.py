@@ -11,6 +11,9 @@ class Producto(Base):
     precio = Column(DECIMAL(10, 2))
     stock = Column(Integer)
     activo = Column(Boolean, default=True)
-
+    nuevo = Column(Boolean, default=True)
+    oferta = Column(Boolean, default=False)
+    imagen = Column(Text, nullable=True)  
     detalles = relationship("DetallePedido", back_populates="producto")
     movimientos = relationship("MovimientoStock", back_populates="producto")
+    

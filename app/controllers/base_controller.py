@@ -1,6 +1,7 @@
+from decimal import Decimal
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from typing import Type, List, Any, Dict
+from typing import Optional, Type, List, Any, Dict
 from ..database.database import SessionLocal
 from ..services.base_service import BaseService
 from pydantic import create_model
@@ -16,7 +17,13 @@ def generate_schemas(model: Type):
     fields = {}
     for column in model.__table__.columns:
         python_type = getattr(column.type, "python_type", Any)
-        default = None if column.nullable or column.default else ...
+        if python_type is Decimal:
+            python_type = float
+        if column.nullable or column.default is not None:
+            python_type = Optional[python_type]
+            default = None
+        else:
+            default = ...
         fields[column.name] = (python_type, default)
     Schema = create_model(f"{model.__name__}Schema", **fields)
     return Schema

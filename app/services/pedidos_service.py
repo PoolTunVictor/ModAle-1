@@ -23,3 +23,29 @@ class PedidoService(BaseService):
         if not pedidos:
             raise HTTPException(status_code=404, detail="El cliente no tiene pedidos registrados")
         return pedidos
+    
+    def get_pedidos_detalle(self):
+        pedidos = (
+            self.db.query(Pedido)
+            .options(
+                joinedload(Pedido.detalles).joinedload(DetallePedido.producto),
+                joinedload(Pedido.direccion)
+            )
+            .all()
+        )
+        if not pedidos:
+            raise HTTPException(status_code=404, detail="El cliente no tiene pedidos registrados")
+        return pedidos
+    
+    def get_pedido_detalle_id(self, id_pedido: int):
+        pedido = (
+            self.db.query(Pedido)
+            .options(
+                joinedload(Pedido.detalles).joinedload(DetallePedido.producto),
+                joinedload(Pedido.direccion)
+            )
+            .filter(Pedido.id_pedido == id_pedido).first()
+        )
+        if not pedido:
+            raise HTTPException(status_code=404, detail="El cliente no tiene pedidos registrados")
+        return pedido
