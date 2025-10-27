@@ -4,7 +4,7 @@ from ..database.database import Base
 
 class Direccion(Base):
     __tablename__ = "direcciones"
-    id_direccion = Column(Integer, primary_key=True, index=True)
+    id_direccion =  Column(Integer, primary_key=True, index=True, autoincrement=True)  
     id_cliente = Column(Integer, ForeignKey("clientes.id_cliente"))
     colonia = Column(String(100))
     lugar = Column(String(100))

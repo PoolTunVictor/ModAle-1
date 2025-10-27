@@ -11,7 +11,7 @@ class EstadoPedido(enum.Enum):
 
 class Pedido(Base):
     __tablename__ = "pedidos"
-    id_pedido = Column(Integer, primary_key=True, index=True)
+    id_pedido = Column(Integer, primary_key=True, index=True, autoincrement=True)  
     id_cliente = Column(Integer, ForeignKey("clientes.id_cliente"))
     id_direccion = Column(Integer, ForeignKey("direcciones.id_direccion"))
     fecha = Column(DateTime, default=datetime.utcnow)

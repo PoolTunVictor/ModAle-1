@@ -4,7 +4,7 @@ from ..database.database import Base
 
 class DetallePedido(Base):
     __tablename__ = "detalles_pedido"
-    id_detalle = Column(Integer, primary_key=True, index=True)
+    id_detalle = Column(Integer, primary_key=True, index=True, autoincrement=True)  
     id_pedido = Column(Integer, ForeignKey("pedidos.id_pedido"))
     id_producto = Column(Integer, ForeignKey("productos.id_producto"))
     cantidad = Column(Integer)

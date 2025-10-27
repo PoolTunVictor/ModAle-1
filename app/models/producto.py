@@ -4,8 +4,9 @@ from ..database.database import Base
 
 class Producto(Base):
     __tablename__ = "productos"
-    id_producto = Column(Integer, primary_key=True, index=True)
+    id_producto =  Column(Integer, primary_key=True, index=True, autoincrement=True)  
     nombre = Column(String(100))
+    categoria = Column(String(100))
     descripcion = Column(Text)
     caracteristicas = Column(Text)
     precio = Column(DECIMAL(10, 2))

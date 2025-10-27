@@ -10,7 +10,7 @@ class TipoMovimiento(enum.Enum):
 
 class MovimientoStock(Base):
     __tablename__ = "movimientos_stock"
-    id_movimiento = Column(Integer, primary_key=True, index=True)
+    id_movimiento =  Column(Integer, primary_key=True, index=True, autoincrement=True)  
     id_producto = Column(Integer, ForeignKey("productos.id_producto"))
     tipo = Column(Enum(TipoMovimiento))
     cantidad = Column(Integer)

@@ -4,7 +4,7 @@ from ..database.database import Base
 
 class Cliente(Base):
     __tablename__ = "clientes"
-    id_cliente = Column(Integer, primary_key=True, index=True)
+    id_cliente =  Column(Integer, primary_key=True, index=True, autoincrement=True)  
     nombre = Column(String(100))
     apellido = Column(String(100))
     telefono = Column(String(20))
